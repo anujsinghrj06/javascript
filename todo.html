@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glass Effect To-Do List</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #f0f0f1, #928dab);
+      font-family: Arial, sans-serif;
+    }
+
+    .glass-box {
+      width: 300px;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(16, 16, 16, 0.475);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+backdrop-filter: blur(10px) brightness(120%) contrast(150%);
+      -webkit-backdrop-filter:blur(10px) brightness(120%) contrast(150%);
+      border: 1px solid rgba(172, 156, 156, 0.982);
+      color: rgb(198, 174, 174);
+      text-align: center;
+    }
+
+    .glass-box h2 {
+      margin: 0 0 15px;
+    }
+
+    input {
+      padding: 8px;
+      border: none;
+      border-radius: 8px;
+      width: 70%;
+      outline: none;
+    }
+
+    .btn {
+      padding: 8px 15px;
+      border-radius: 8px;
+      border: none;
+      margin-left: 5px;
+      background: rgba(153, 150, 150, 0.826);
+      color: rgba(201, 206, 212, 0.906);
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    li {
+      padding: 8px;
+      margin: 5px 0;
+      background: rgba(217, 209, 209, 0.505);
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li button {
+      background: rgba(224, 221, 221, 0.799);
+      border: none;
+      border-radius: 5px;
+      color: rgba(172, 51, 51, 0.742);
+      padding: 5px 8px;
+      cursor: pointer;
+    }
+
+    li button:hover {
+      background: rgba(255, 0, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <div class="glass-box">
+    <h2>📝 To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button class="btn" onclick="addTask()">Add</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const taskText = input.value.trim();
+
+      if (taskText === "") return;
+
+      const li = document.createElement("li");
+      li.textContent = taskText;
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
+      removeBtn.onclick = function () {
+        li.remove();
+      };
+
+      li.appendChild(removeBtn);
+      document.getElementById("taskList").appendChild(li);
+
+      input.value = ""; // ✅ fixed typo
+    }
+
+
+  </script>
+</body>
+</html>

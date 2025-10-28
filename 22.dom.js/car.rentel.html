@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Rental - Header</title>
+
+  
+  
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #5ea3c1, #5ea3c1, #5ea3c1);
+    }
+
+    /* Header Section */
+     header {
+      width: 100%;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(14, 168, 145, 0.927);   /* Transparent */
+      backdrop-filter: blur(15px);           /* Glass effect */
+      -webkit-backdrop-filter: blur(15px);   /* Safari support */
+      border-bottom: 1px solid rgba(74, 198, 207, 0.68);
+      z-index: 1000;
+    }
+    
+
+    /* Logo */
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 1px;
+    }
+
+    /* Navigation Menu */
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #dad9d22f; /* golden hover */
+    }
+
+    /* Call to Action Button */
+    .btn {
+      padding: 10px 20px;
+      position: relative;
+      background: #e01a1a;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #55c24bdd;
+    }
+
+    /* For spacing below fixed header */
+    .hero {
+      margin-top: 100px;
+      text-align: center;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  </header>
+
+  <!-- Hidden slider section -->
+  <div class="slider-section" id="sliderSection">
+    <button class="close" id="closeBtn">&times;</button>
+
+    <div class="slides" id="slides">
+      <img src="car1.jpg" alt="Car 1">
+      <img src="car2.jpg" alt="Car 2">
+      <img src="car3.jpg" alt="Car 3">
+      <img src="car4.jpg" alt="Car 4">
+    </div>
+
+    <button class="prev" id="prev">&#10094;</button>
+    <button class="next" id="next">&#10095;</button>
+
+    <div class="dots" id="dots"></div>
+  </div>
+
+
+  <!-- Header -->
+  <header>
+    <div class="logo">🚗 Rent My Car</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a id="carsBtn">Cars</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="btn">Book Now</button>
+  </header>
+
+  <!-- Hero Section (optional preview below header) -->
+  <div class="hero">
+    <h1>Find Your Perfect Ride</h1>
+    <p>Affordable car rentals with premium service.</p>
+  </div>
+<script>
+const carsBtn = document.getElementById("carsBtn");
+    const sliderSection = document.getElementById("sliderSection");
+    const closeBtn = document.getElementById("closeBtn");
+    const slides = document.getElementById("slides");
+    const images = slides.querySelectorAll("img");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+    const dotsContainer = document.getElementById("dots");
+
+    let index = 0;
+
+    // Create dots dynamically
+    images.forEach((_, i) => {
+      const dot = document.createElement("span");
+      if (i === 0) dot.classList.add("active");
+      dot.addEventListener("click", () => showSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.querySelectorAll("span");
+
+    function showSlide(i) {
+      index = (i + images.length) % images.length;
+      slides.style.transform = `translateX(${-index * 100}%)`;
+
+      dots.forEach(dot => dot.classList.remove("active"));
+      dots[index].classList.add("active");
+    }
+
+    next.addEventListener("click", () => showSlide(index + 1));
+    prev.addEventListener("click", () => showSlide(index - 1));
+
+    // Show popup
+    carsBtn.addEventListener("click", () => {
+      sliderSection.style.display = "flex";
+      showSlide(index);
+    });
+
+    // Close popup
+    closeBtn.addEventListener("click", () => {
+      sliderSection.style.display = "none";
+    });
+
+    // Auto slide
+    setInterval(() => showSlide(index + 1), 4000);
+  </script>
+
+</script>
+</body>
+</html>
